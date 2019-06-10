@@ -55,11 +55,11 @@ class Login extends Component {
             dispatch(authActions.login(username, password));
         }
     };
-    toggleRegister = e => {
-        var res = this.state.toggleregister;
-        this.setState({ toggleregister: !res });
-        console.log('meow')
-    }
+    // toggleRegister = e => {
+    //     var res = this.state.toggleregister;
+    //     this.setState({ toggleregister: !res });
+    //     console.log('meow')
+    // }
 
     render() {
         const { loggedIn } = this.props.auth;
@@ -102,10 +102,10 @@ class Login extends Component {
                                     <Parts style={{ justifyContent: 'space-around' }}>
                                         <Button type="primary" htmlType="submit" className="login-form-button">Log in</Button>
                                         {loggedIn && <Redirect to="/dashboard" />}
-                                        <Button onClick={this.toggleRegister}>Register</Button>
-                                        {
+                                        <Button href="/register">Register</Button>
+                                        {/* {
                                             this.state.toggleregister ? (<h3 style={{ textAlign: 'left', color: '#B4B4BC' }}>Login to manage your server</h3>) : null
-                                        }
+                                        } */}
                                     </Parts>
                                 </Parts>
                             </Form.Item>

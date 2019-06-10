@@ -22,7 +22,7 @@ function login (username, password){
         // }
         if (username === 'shreyas' && password === 'shreyas') {
             let user = {
-                uname : 'shreyas1'
+                uname : 'shreyas'
             };
             localStorage.setItem("user", JSON.stringify(user));
             dispatch(success(user));

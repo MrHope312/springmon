@@ -2,17 +2,14 @@ let config = {};
 
 if (process.env.REACT_APP_API_ENDPOINT) {
   config = {
-    apiEndpoint: process.env.REACT_APP_API_ENDPOINT,
-    apiUrl: process.env.REACT_APP_API_VERSION
+    apiEndpoint: process.env.REACT_APP_API_ENDPOINT
   };
 } else {
   config = {
-    apiEndpoint: "/",
-    apiUrl: "api/v1/"
+    apiEndpoint: "http://springboot.actuator.demo.appngeek.com:8080/actuator"
   };
 }
 
 export const appConfig = {
   ...config
 };
-    
