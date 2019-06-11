@@ -1,4 +1,4 @@
-//Home Landing Page
+//Login Page
 import React, { Component } from 'react';
 
 import { connect } from "react-redux";
@@ -63,8 +63,6 @@ class Login extends Component {
     render() {
         const { loggedIn } = this.props.auth;
         const { username, password } = this.state;
-
-
         return (
             <Background>
                 <Container>
