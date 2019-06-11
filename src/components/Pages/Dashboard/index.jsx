@@ -1,25 +1,22 @@
-//Home Landing Page
+//Dashboard Page
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 // import { Redirect } from "react-router-dom";
 import { authActions, itemsActions } from "../../../actions";
-import { Layout, Menu, Breadcrumb, Icon} from 'antd';
-// const { SubMenu } = Menu;
+import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 
 const { Header, Content, Sider } = Layout;
 class Dashboard extends Component {
     state = {
-        urldata: ''
+        urldata: '',
+        item: {}
     }
     componentWillReceiveProps(nextProps) {
-        if (nextProps.auth) {
-            const { loading } = nextProps.auth;
-            this.setState({ loading });
-        }
+        this.setState({ item: nextProps.item.item})
+        console.log(nextProps.item.item,"component receive next props")
     }
     getItems = (e, urldata) => {
         const { dispatch } = this.props;
-        console.log(urldata)
         dispatch(itemsActions.getItem(urldata));
     }
     logoutHandler = () => {
@@ -28,8 +25,9 @@ class Dashboard extends Component {
 
     render() {
         const userName = this.props.auth.user.uname;
-        // const itemData = this.state;
-        let sidebaritems = ['health', 'auditevents', 'beans', 'caches', 'conditions', 'config props', 'env', 'info', 'loggers', 'heap dump', 'thread dump', 'metrics', 'scheduled tasks', 'httptrace', 'mappings', 'jolokia']
+        const { item } = this.state;
+        // console.log(item.item,"data of item")
+        let sidebaritems = ['health', 'auditevents', 'beans', 'caches', 'conditions', 'configprops', 'env', 'info', 'loggers', 'heap dump', 'thread dump', 'metrics', 'scheduled tasks', 'httptrace', 'mappings', 'jolokia']
         return (
             <Layout>
                 <Header className="header">
@@ -51,7 +49,7 @@ class Dashboard extends Component {
                     <Sider width={200} style={{ background: '#fff' }}>
                         <Menu
                             mode="inline"
-                            defaultSelectedKeys={['1']}
+                            defaultSelectedKeys={['0']}
                             defaultOpenKeys={['sub1']}
                             style={{ height: '100%', borderRight: 0 }}
                         >
@@ -77,7 +75,7 @@ class Dashboard extends Component {
                                 minHeight: 280,
                             }}
                         >
-                            {/* {toDisplay} */}
+                            <h1>{JSON.stringify(item)}</h1>
                         </Content>
                     </Layout>
                 </Layout>
@@ -85,10 +83,14 @@ class Dashboard extends Component {
         );
     }
 }
-const mapStateToProps = state => ({
-    auth: state.auth,
-    // itemData: state.itemData
-});
+const mapStateToProps = state => {
+    return {
+        auth: state.auth,
+        item: state.item
+    };
+};
+
+
 
 export default connect(mapStateToProps)(Dashboard);
 

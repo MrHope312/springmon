@@ -33,8 +33,7 @@ class Login extends Component {
         username: "",
         password: "",
         submitted: false,
-        loading: false,
-        toggleregister: false
+        loading: false
     };
     componentWillReceiveProps(nextProps) {
         if (nextProps.auth) {

@@ -17,9 +17,7 @@ function login (username, password){
         dispatch(request({
             username
         }));
-        // let faile = {
-        //     error: 'some failure'
-        // }
+
         if (username === 'shreyas' && password === 'shreyas') {
             let user = {
                 uname : 'shreyas'

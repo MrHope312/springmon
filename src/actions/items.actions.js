@@ -6,22 +6,24 @@ export const itemsActions = {
 }
 
 function getItem(url) {
-    console.log(url,"data on action")
-    console.log(`${appConfig.apiEndpoint}/${url}`)
+    // console.log(url,"data on action")
+    // console.log(`${appConfig.apiUrl}/${url}`)
     return dispatch =>{
         http
         .get(`${appConfig.apiUrl}/${url}`)
         .then(function(response){
-            if(response.data.success) {
-                dispatch(success(response.data.data));
+            if(response.data) {
+                console.log(response.data,"object received from api")
+                dispatch(success(response.data));
             }else {
-                dispatch(failure(response.data.reason));
+                console.log(response.data)
+                dispatch(failure(response.data));
             }
         })
     };
-    function success(itemData) {
+    function success(item) {
         return {
-            type: itemsConstants.ITEMS_GET_SUCCESS, itemData
+            type: itemsConstants.ITEMS_GET_SUCCESS, item
         }
     }
     function failure(error) {

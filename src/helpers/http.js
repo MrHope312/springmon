@@ -4,18 +4,19 @@ import {
 } from "./config";
 // console.log(appConfig.apiEndpoint)
 export const http = axios.create({
-    baseURL: appConfig.apiEndpoint,
+    baseURL: appConfig.apiUrl,
     headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
     }
 });
 
 http.interceptors.request.use(
     function (config) {
-        // let user = JSON.parse(localStorage.getItem("user"))
-        // if (user && user.token) {
-        //     config.headers["x-auth-token"] = user.token;
-        // }
+        let user = JSON.parse(localStorage.getItem("user"))
+        if (user && user.token) {
+            config.headers["x-auth-token"] = user.token;
+        }
         return config;
     },
     function (err) {
