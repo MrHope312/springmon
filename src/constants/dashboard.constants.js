@@ -1,0 +1,4 @@
+export const dashboardConstants = {
+    DASHBOARD_GET_SUCCESS: "DASHBOARD_GET_SUCCESS",
+    DASHBOARD_GET_FAILURE: "DASHBOARD_GET_FAILURE",
+}

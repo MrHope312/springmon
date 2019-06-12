@@ -1,3 +1,3 @@
 export * from "./auth.actions";
-export * from './items.actions';
+export * from './dashboard.actions';
 export * from './regsiter.actions';

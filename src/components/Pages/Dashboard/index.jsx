@@ -1,23 +1,23 @@
 //Dashboard Page
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-// import { Redirect } from "react-router-dom";
-import { authActions, itemsActions } from "../../../actions";
+import { Link } from "react-router-dom";
+import { authActions, dashboardActions } from "../../../actions";
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 
 const { Header, Content, Sider } = Layout;
 class Dashboard extends Component {
     state = {
         urldata: '',
-        item: {}
+        dashboard: {}
     }
     componentWillReceiveProps(nextProps) {
-        this.setState({ item: nextProps.item.item})
-        console.log(nextProps.item.item,"component receive next props")
+        this.setState({ dashboard: nextProps.dashboard.dashboard})
+        console.log(nextProps.dashboard.dashboard,"component receive next props")
     }
     getItems = (e, urldata) => {
         const { dispatch } = this.props;
-        dispatch(itemsActions.getItem(urldata));
+        dispatch(dashboardActions.getItem(urldata));
     }
     logoutHandler = () => {
         this.props.dispatch(authActions.logout());
@@ -25,7 +25,7 @@ class Dashboard extends Component {
 
     render() {
         const userName = this.props.auth.user.uname;
-        const { item } = this.state;
+        const { dashboard } = this.state;
         // console.log(item.item,"data of item")
         let sidebaritems = ['health', 'auditevents', 'beans', 'caches', 'conditions', 'configprops', 'env', 'info', 'loggers', 'heap dump', 'thread dump', 'metrics', 'scheduled tasks', 'httptrace', 'mappings', 'jolokia']
         return (
@@ -39,10 +39,10 @@ class Dashboard extends Component {
                     >
                         <Menu.Item key="1">Home</Menu.Item>
                         <Menu.Item key="2">{userName}</Menu.Item>
-                        <Menu.Item key="3"><a href="/servers">Servers</a></Menu.Item>
-                        <Menu.Item key="4"><a className="dropdown-item"
+                        <Menu.Item key="3"><Link to="/servers">Servers</Link></Menu.Item>
+                        <Menu.Item key="4"><Link className="dropdown-item"
                             onClick={this.logoutHandler}
-                            href="/">Logout</a></Menu.Item>
+                            to="/">Logout</Link></Menu.Item>
                     </Menu>
                 </Header>
                 <Layout>
@@ -75,7 +75,7 @@ class Dashboard extends Component {
                                 minHeight: 280,
                             }}
                         >
-                            <h1>{JSON.stringify(item)}</h1>
+                            <h1>{JSON.stringify(dashboard)}</h1>
                         </Content>
                     </Layout>
                 </Layout>
@@ -86,7 +86,7 @@ class Dashboard extends Component {
 const mapStateToProps = state => {
     return {
         auth: state.auth,
-        item: state.item
+        dashboard: state.dashboard
     };
 };
 

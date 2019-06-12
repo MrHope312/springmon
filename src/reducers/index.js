@@ -9,14 +9,14 @@ import {
     user
 } from './register.reducer';
 import {
-    item
-} from './items.reducer';
+    dashboard
+} from './dashboard.reducer';
 
 
 
 const rootReducer = combineReducers({
     auth,
     user,
-    item
+    dashboard
 });
 export default rootReducer;

@@ -1,18 +1,16 @@
 //Server Page
 import React, { Component } from 'react';
-
-// import { connect } from "react-redux";
-// import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import Background from '../../Layouts/Background';
-import { Card, Icon, Button, Form, Input, Modal, Radio } from 'antd';
+import { Layout, Card, Button, Form, Input, Modal, Radio,Menu, Breadcrumb, Icon } from 'antd';
+const { Header } = Layout;
 
-// import Loading from "../Loading/Loading";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1.2em;
   height: 100vh;
+  width: 100vw;
   position: relative;
   background-color: #fff;
   justify-content: top;
@@ -29,6 +27,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
         render() {
             const { visible, onCancel, onCreate, form } = this.props;
             const { getFieldDecorator } = form;
+
             return (
                 <Modal
                     visible={visible}
@@ -87,9 +86,25 @@ class Servers extends Component {
         this.formRef = formRef;
     };
     render() {
+        const userName = this.props.auth.user.uname;
         return (
-            <Background>
+            <Layout>
                 <Container>
+                <Header className="header" style={{width: '100%'}}>
+                    <Menu
+                        theme="dark"
+                        mode="horizontal"
+                        defaultSelectedKeys={['2']}
+                        style={{ lineHeight: '64px', float: 'right' }}
+                    >
+                        <Menu.Item key="1">Home</Menu.Item>
+                        <Menu.Item key="2">{userName}</Menu.Item>
+                        <Menu.Item key="3"><Link to="/servers">Servers</Link></Menu.Item>
+                        <Menu.Item key="4"><Link className="dropdown-item"
+                            onClick={this.logoutHandler}
+                            to="/">Logout</Link></Menu.Item>
+                    </Menu>
+                </Header>
                     <h1>Welcome to Your Servers</h1>
                     <ServerContainer>
                         <Card style={{ width: '200px', height: '200px', margin: '1em', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -110,8 +125,14 @@ class Servers extends Component {
                         />
                     </ServerContainer>
                 </Container>
-            </Background>
+                </Layout>
         );
     }
 }
-export default Servers;
+
+const mapStateToProps = state => {
+    return {
+        auth: state.auth,
+    };
+};
+export default connect(mapStateToProps)(Servers);

@@ -1,7 +1,7 @@
-import { itemsConstants } from '../constants';
+import { dashboardConstants } from '../constants';
 import { http, appConfig } from "../helpers";
 
-export const itemsActions = {
+export const dashboardActions = {
     getItem
 }
 
@@ -21,14 +21,14 @@ function getItem(url) {
             }
         })
     };
-    function success(item) {
+    function success(dashboard) {
         return {
-            type: itemsConstants.ITEMS_GET_SUCCESS, item
+            type: dashboardConstants.DASHBOARD_GET_SUCCESS, dashboard
         }
     }
     function failure(error) {
         return {
-            type: itemsConstants.ITEMS_GET_FAILURE, error
+            type: dashboardConstants.DASHBOARD_GET_FAILURE, error
         }
     }
 
